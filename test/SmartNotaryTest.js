@@ -11,6 +11,15 @@ contract('SmartNotary', function(accounts) {
           assert.strictEqual(returnValue[1], web3.eth.accounts[0], "owner is not web3.eth.accounts[0]");
       });
     });
+  it("should set and read another file hash asynch", async function() {
+
+          const instance = await SmartNotary.deployed();
+          instance.set("anotherHash", {from: web3.eth.accounts[0], value: web3.toWei("0.1", "ether")});
+          returnValue = await instance.get("anotherHash");
+
+            assert.strictEqual(returnValue[1], web3.eth.accounts[0], "owner is not web3.eth.accounts[0]");
+
+      });
   it("should set another file hash", function() {
         var instance;
         return SmartNotary.deployed().then(function(_instance) {
